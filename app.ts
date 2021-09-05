@@ -7,6 +7,7 @@ import character from "./routes/character";
 import auth from "./routes/auth";
 import user from "./routes/user";
 import passport from 'passport';
+import cors from 'cors';
 import JwtStrategy from './strategies/jwt';
 import mongoose from 'mongoose';
 import { StatusCodes } from "./constants";
@@ -18,7 +19,9 @@ export const app = express();
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json())
 app.use(cookieParser());
+app.use(cors());
 // app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/user', user);

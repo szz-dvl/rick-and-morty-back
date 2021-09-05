@@ -70,7 +70,7 @@ class User {
         return await this.findOne({ nick });
     }
 
-    public async event(this: DocumentType<User>, event: EventInfo) {
+    public event(this: DocumentType<User>, event: EventInfo) {
 
         const newLength = this.history.unshift({
             ...event,
@@ -80,9 +80,11 @@ class User {
         if (newLength > 10) this.history = this.history.slice(0, 10);
 
         this.markModified("history");
+
+        return this;
     }
 
-    public async create(this: DocumentType<User>, info: CreateInfo) {
+    public create(this: DocumentType<User>, info: CreateInfo) {
 
         this.created = {
             ...info,
@@ -90,21 +92,27 @@ class User {
         };
 
         this.markModified("created"); // Little bit paraniod here ... ¬¬
+
+        return this;
     }
 
-    public async pushFav(this: DocumentType<User>, fav: string) {
+    public pushFav(this: DocumentType<User>, fav: string) {
 
         if (!this.favs.includes(fav))
             this.favs.push(fav);
 
         this.markModified("favs");
+
+        return this;
     }
 
-    public async pullFav(this: DocumentType<User>, fav: string) {
+    public pullFav(this: DocumentType<User>, fav: string) {
 
         this.favs = this.favs.filter(stored => stored !== fav) as Types.Array<string>;
 
         this.markModified("favs");
+
+        return this;
     }
 
     /**

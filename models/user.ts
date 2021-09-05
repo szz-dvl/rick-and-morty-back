@@ -50,7 +50,7 @@ class HistoryEntry extends Info {
     }
 })
 @modelOptions({ options: { allowMixed: Severity.ALLOW } })
-class User {
+export class User {
     @prop({ required: true, unique: true })
     public nick!: string;
 
@@ -58,7 +58,7 @@ class User {
     public password!: string;
 
     @prop({ required: true, default: [] })
-    public favs!: Types.Array<string>;
+    public favs!: Types.Array<number>;
 
     @prop({ type: () => HistoryEntry, required: true, default: [], innerOptions: { _id: false } })
     public history!: HistoryEntry[];
@@ -96,7 +96,7 @@ class User {
         return this;
     }
 
-    public pushFav(this: DocumentType<User>, fav: string) {
+    public pushFav(this: DocumentType<User>, fav: number) {
 
         if (!this.favs.includes(fav))
             this.favs.push(fav);
@@ -106,9 +106,9 @@ class User {
         return this;
     }
 
-    public pullFav(this: DocumentType<User>, fav: string) {
+    public pullFav(this: DocumentType<User>, fav: number) {
 
-        this.favs = this.favs.filter(stored => stored !== fav) as Types.Array<string>;
+        this.favs = this.favs.filter(stored => stored !== fav) as Types.Array<number>;
 
         this.markModified("favs");
 

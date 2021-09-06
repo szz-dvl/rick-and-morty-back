@@ -21,7 +21,7 @@ router.post('/favorite', async (req, res, next) => {
 
                 ip: getIp(req),
                 ua: req.headers['user-agent'] || "",
-                event: `favorite ${id}`
+                event: `favorite-${id}`
 
             }).save();
 
@@ -44,7 +44,7 @@ router.delete('/favorite/:id', async (req, res, next) => {
 
                 ip: getIp(req),
                 ua: req.headers['user-agent'] || "",
-                event: `unfavorite ${id}`
+                event: `unfavorite-${id}`
 
             }).save();
 

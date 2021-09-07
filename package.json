@@ -9,7 +9,7 @@
     "build": "tsc",
     "prestart": "npm run build",
     "start": "node .",
-    "postbuild": "cpy './**/*.js' './bin/www' '!./dist/' '!./node_modules' ./dist/ --cwd=./ --parents",
+    "postbuild": "cpy './**/*.js' './bin/www' './.env' '!./dist/' '!./node_modules' ./dist/ --cwd=./ --parents",
     "rebuild": "npm-run-all clean build",
     "serve": "npm-run-all clean start"
   },

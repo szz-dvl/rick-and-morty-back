@@ -1,5 +1,4 @@
 import express, { Request, Response, NextFunction } from "express";
-// import path from "path";
 import cookieParser from "cookie-parser";
 import logger from 'morgan';
 
@@ -22,7 +21,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json())
 app.use(cookieParser());
 app.use(cors());
-// app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/user', user);
 app.use('/auth', auth);
